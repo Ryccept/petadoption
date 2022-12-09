@@ -1,0 +1,36 @@
+{%extends 'base.html'%}{% block title %}Add Pet{%endblock%} {% block content%}
+
+<h1>Edit Current Pet:</h1>
+
+<h2>{{pet.name}}</h2>
+
+<img src="{{pet.photo_url}}" alt="{{pet.name}}" width="400px" height="350px" />
+<p>Hi! I'm {{pet.name}}. Here is some information about me:</p>
+<ul>
+  <li>
+    {%if pet.available%}
+    <p>I am <b>available</b> to be adopted!</p>
+    {%else%}
+    <p>I am <b>not available</b> to be adopted right now.</p>
+    {%endif%}
+  </li>
+  <li>My species is a {{pet.species}}.</li>
+  <li>I am {{pet.age}} years-old.</li>
+  <li>Notes about me: {{pet.notes}}</li>
+</ul>
+<hr />
+<form id="pet-add-form" method="POST">
+  {{form.hidden_tag()}} {%for field in form if field.widget.input_type !=
+  'hidden'%}
+
+  <p>
+    {{field.label}} {{field}} {% for errors in field.errors%} {{error}}
+    {%endfor%}
+  </p>
+  {%endfor%}
+  <button type="submit">Submit</button>
+</form>
+
+<hr />
+<a href="/"><button>Cancel and Go Back</button></a>
+{%endblock%}

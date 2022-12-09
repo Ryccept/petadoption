@@ -1,0 +1,29 @@
+{%extends 'base.html'%}{% block title %}Home{%endblock%} {% block content%}
+
+<div class="row justify-content-center">
+  <h1>Pets:</h1>
+  <div class="col border">
+    <ul>
+      {% for pet in pets%}
+      <li>
+        <img
+          src="{{pet.photo_url}}"
+          alt="{{pet.name}}"
+          width="200px"
+          height="200px"
+        />
+
+        {%if pet.available%}
+        <p><a href="/pets/{{pet.id}}">{{pet.name}}</a> is <b>available!</b></p>
+        {%else%}
+        <p>{{pet.name}} is <b>not available.</b></p>
+        {%endif%}
+      </li>
+      <br />
+      {%endfor%}
+    </ul>
+  </div>
+  <hr />
+</div>
+<a href="/pets/add"><button>Add New Pet</button></a>
+{%endblock%}
